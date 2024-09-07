@@ -1,58 +1,67 @@
 <!doctype html>
 <html>
-	<head>
-		<title>Image functions</title>
-		<script src="image_functions.js"></script>
-	</head>
-	<body>
-		<canvas id="artwork" width="500" height="500">
 
-		</canvas>
-		<img id="img">
-		<button onclick="importImage();">Import image</button>
-		<button onclick="invert();">Invert image</button>
-		<button onclick="grayscale();">Grayscale image</button>
-		<button onclick="sepia();">Sepia image</button>
-		<button onclick="darken();">Darken image</button>
-		<button onclick="fill();">Fill image</button>
-		<img id="image_import" style="display:none" alt="Import"/>
-		<script>
-			var c = document.getElementById('artwork');
-			var ctx = c.getContext('2d');
-			function importImage(){
-				var link = window.prompt('Insert a URL for an image to import.');
-				if(link != "" && link != null){
-					BalfJSTools.Image.Tools.CanvasLoadImageFromURL(link, ctx);
-				}
+<head>
+	<title>Image functions</title>
+	<script src="image_functions.js"></script>
+</head>
+
+<body>
+	<canvas id="artwork" width="500" height="500">
+
+	</canvas>
+	<img id="img">
+	<button onclick="importImage();">Import image</button>
+	<button onclick="invert();">Invert image</button>
+	<button onclick="grayscale();">Grayscale image</button>
+	<button onclick="sepia();">Sepia image</button>
+	<button onclick="darken();">Darken image</button>
+	<button onclick="fill();">Fill image</button>
+	<img id="image_import" style="display:none" alt="Import" />
+	<script>
+		var c = document.getElementById('artwork');
+		var ctx = c.getContext('2d');
+
+		function importImage() {
+			var link = window.prompt('Insert a URL for an image to import.');
+			if (link != "" && link != null) {
+				BalfJSTools().image.tools.CanvasLoadImageFromURL(link, ctx);
 			}
-			function invert(){
-				var imgd = ctx.getImageData(0, 0, 500, 500);
-				ctx.putImageData(BalfJSTools.Image.Effects.InvertColour(imgd), 0, 0);
-			}
-			function grayscale(){
-				var imgd = ctx.getImageData(0, 0, 500, 500);
-				ctx.putImageData(BalfJSTools.Image.Effects.BlackAndWhite(imgd), 0, 0);
-			}
-			function sepia(){
-				var imgd = ctx.getImageData(0, 0, 500, 500);
-				ctx.putImageData(BalfJSTools.Image.Effects.Sepia(imgd), 0, 0);
-			}
-			function darken(){
-				var imgd = ctx.getImageData(0, 0, 500, 500);
-				BalfJSTools.Image.Tools.ImageDataToImageTag(BalfJSTools.Image.Effects.Darken(imgd), document.getElementById('img'));
-			}
-			function fill(){
-				var imgd = ctx.getImageData(0, 0, 500, 500);
-				var color = new Object();
-				color.R = 255;
-				color.G = 0;
-				color.B = 255;
-				ctx.putImageData(BalfJSTools.Image.Effects.FloodFill(imgd, 3, 3, color), 0, 0);
-			}
-			window.onload = function(){
-				var lnk = 'Test.png';
-				BalfJSTools.Image.Tools.CanvasLoadImageFromURL(lnk, ctx);
-			}
-		</script>
-	</body>
+		}
+
+		function invert() {
+			var imgd = ctx.getImageData(0, 0, 500, 500);
+			ctx.putImageData(BalfJSTools().image.effects.InvertColour(imgd), 0, 0);
+		}
+
+		function grayscale() {
+			var imgd = ctx.getImageData(0, 0, 500, 500);
+			ctx.putImageData(BalfJSTools().image.effects.BlackAndWhite(imgd), 0, 0);
+		}
+
+		function sepia() {
+			var imgd = ctx.getImageData(0, 0, 500, 500);
+			ctx.putImageData(BalfJSTools().image.effects.Sepia(imgd), 0, 0);
+		}
+
+		function darken() {
+			var imgd = ctx.getImageData(0, 0, 500, 500);
+			BalfJSTools().image.tools.ImageDataToImageTag(BalfJSTools().image.effects.Darken(imgd), document.getElementById('img'));
+		}
+
+		function fill() {
+			var imgd = ctx.getImageData(0, 0, 500, 500);
+			var color = new Object();
+			color.R = 255;
+			color.G = 0;
+			color.B = 255;
+			ctx.putImageData(BalfJSTools().image.effects.FloodFill(imgd, 3, 3, color), 0, 0);
+		}
+		window.onload = function() {
+			var lnk = 'Test.png';
+			BalfJSTools().image.tools.canvasLoadImageFromURL(lnk, ctx);
+		}
+	</script>
+</body>
+
 </html>
